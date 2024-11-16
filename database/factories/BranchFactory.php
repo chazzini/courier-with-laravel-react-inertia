@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,16 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'branch_code' => \Str::random(10),
+            'street' => $this->faker->streetAddress(),
+            'city' => $this->faker->city,
+            'state' => $this->faker->state,
+            'country' => $this->faker->country,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->email,
+            'zip_code' => $this->faker->postcode(),
+            'address' => $this->faker->address(),
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }
