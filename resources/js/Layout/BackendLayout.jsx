@@ -5,7 +5,7 @@ import SideNavigation from "@/Layout/include/SideNavigation";
 
 const BackendLayout = ({ children }) => {
     return (
-        <main className="overflow-hidden text-white bg-blue-800 h-lvh">
+        <main className="relative overflow-hidden h-lvh">
             <Header />
             <SideNavigation />
             {children}
