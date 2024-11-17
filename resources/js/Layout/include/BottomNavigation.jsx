@@ -5,8 +5,10 @@ import { CgListTree } from "react-icons/cg";
 import { RiHome5Fill } from "react-icons/ri";
 import { Link } from "@inertiajs/react";
 import BottomNavigationButton from "../../Components/BottomNavigationButton";
+import { useRoute } from "../../../../vendor/tightenco/ziggy";
 
 const BottomNavigation = ({ openMenu }) => {
+    const route = useRoute();
     return (
         <div className="absolute bottom-0 w-full text-gray-600 ">
             <nav className="w-4/5 mx-auto bg-white border border-gray-300 rounded-t-lg shadow-sm md:hidden">
@@ -21,7 +23,7 @@ const BottomNavigation = ({ openMenu }) => {
                     </li>
                     <li>
                         <BottomNavigationButton
-                            link="/"
+                            link={route("branches.index")}
                             icon={<RiHome5Fill />}
                         />
                     </li>

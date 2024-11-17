@@ -22,7 +22,7 @@ const SideNavigation = ({ toggle }) => {
                 </div>
                 <ul>
                     <SideNavigationLink
-                        link="/"
+                        link={route("branches.index")}
                         icon={<MdDashboard />}
                         text="Dashboard"
                     />

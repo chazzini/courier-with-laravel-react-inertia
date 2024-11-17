@@ -22,17 +22,15 @@ const BackendLayout = ({ children }) => {
 
     const [sidebarToggle, setSidebarToggle] = useState("false");
 
-    console.log(sidebarToggle);
-
     return (
         <div className="relative overflow-hidden h-lvh w-full">
-            <main className="w-full flex flex-row">
+            <div className="w-full flex flex-row">
                 <SideNavigation toggle={sidebarToggle} />
                 <div className="w-10/12">
                     <Header />
-                    <div>{children}</div>
+                    <main className="mt-4">{children}</main>
                 </div>
-            </main>
+            </div>
 
             <BottomNavigation
                 openMenu={() => {
