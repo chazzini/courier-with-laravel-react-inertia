@@ -1,5 +1,12 @@
+import { Link } from "@inertiajs/react";
+
 const Header = () => {
-    return <p>Header</p>;
+    return (
+        <div className="w-full h-10 py-4 px-12 border border-b-slate-200 flex flex-row justify-between items-center">
+            <Link>Antony</Link>
+            <Link>Antony</Link>
+        </div>
+    );
 };
 
 export default Header;

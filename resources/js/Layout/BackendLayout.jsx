@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BottomNavigation from "@/Layout/include/BottomNavigation";
 import Header from "@/Layout/include/Header";
 import SideNavigation from "@/Layout/include/SideNavigation";
@@ -20,14 +20,30 @@ const BackendLayout = ({ children }) => {
         toast.info(flash.info);
     }
 
+    const [sidebarToggle, setSidebarToggle] = useState("false");
+
+    console.log(sidebarToggle);
+
     return (
-        <main className="relative overflow-hidden h-lvh">
-            <Header />
-            <SideNavigation />
-            {children}
-            <BottomNavigation />
+        <div className="relative overflow-hidden h-lvh w-full">
+            <main className="w-full flex flex-row">
+                <SideNavigation toggle={sidebarToggle} />
+                <div className="w-10/12">
+                    <Header />
+                    <div>{children}</div>
+                </div>
+            </main>
+
+            <BottomNavigation
+                openMenu={() => {
+                    console.log("here");
+                    setSidebarToggle((prev) => {
+                        return !prev;
+                    });
+                }}
+            />
             <ToastContainer />
-        </main>
+        </div>
     );
 };
 

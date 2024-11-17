@@ -54,10 +54,8 @@ const Branch = ({ branches }) => {
         });
     };
 
-    console.log(data.street);
-
     return (
-        <div className="w-full px-4 ">
+        <div className="w-full px-4">
             <button
                 className="py-2 px-4 hover:bg-black bg-slate-800 text-white rounded-md transition-all duration-300 ease-in"
                 onClick={() => setToggleModal(true)}
