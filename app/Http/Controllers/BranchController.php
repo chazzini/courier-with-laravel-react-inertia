@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
-use App\Http\Requests\StoreBranchRequest;
-use App\Http\Requests\UpdateBranchRequest;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Str;
 
 class BranchController extends Controller
 {
@@ -30,9 +30,23 @@ class BranchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBranchRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'country' => 'required|string|max:150',
+            'street' => 'required|string|max:150',
+            'city' => 'required|string|max:150',
+            'state' => 'required|string|max:100',
+            'phone' => 'required|string|max:20',
+            'zip_code' => 'string',
+        ]);
+
+        $branch_code = Str::random(3) . '-' . Str::random(3);
+
+        Branch::create($validated + ['branch_code' => $branch_code]);
+
+        return redirect(route('branches.index'))->with('success', 'Branch created successfully');
     }
 
     /**
@@ -54,7 +68,7 @@ class BranchController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBranchRequest $request, Branch $branch)
+    public function update(Request $request, Branch $branch)
     {
         //
     }

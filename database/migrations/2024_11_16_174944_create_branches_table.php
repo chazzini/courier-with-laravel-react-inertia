@@ -20,7 +20,6 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('email');
             $table->string('zip_code');
-            $table->text('address');
             $table->foreignId('user_id');
             $table->timestamps();
         });

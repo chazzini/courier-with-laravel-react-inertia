@@ -3,11 +3,29 @@ import { BiEditAlt } from "react-icons/bi";
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useForm } from "@inertiajs/react";
 import ConfirmationDialog from "../Components/ConfirmationDialog";
+import CreateModal from "../Components/Branch/CreateModal";
 
 const Branch = ({ branches }) => {
-    const { data, setData, post, processing, delete: destroy } = useForm();
+    const {
+        data,
+        setData,
+        post,
+        processing,
+        errors,
+        reset,
+        delete: destroy,
+    } = useForm({
+        street: "",
+        state: "",
+        phone: "",
+        email: "",
+        city: "warri",
+        country: "",
+        zip_code: "",
+    });
 
     const [isOpen, setIsOpen] = useState(false);
+    const [toggleModal, setToggleModal] = useState(false);
     const [targetBranch, setTargetBranch] = useState({ id: "", street: "" });
 
     const handleDeleteBranch = (id, street) => {
@@ -27,8 +45,25 @@ const Branch = ({ branches }) => {
         setIsOpen(false);
     };
 
+    const createBranch = () => {
+        post("/branches", {
+            onSuccess: () => {
+                reset();
+                setToggleModal(false);
+            },
+        });
+    };
+
+    console.log(data.street);
+
     return (
         <div className="w-full px-4 ">
+            <button
+                className="py-2 px-4 hover:bg-black bg-slate-800 text-white rounded-md transition-all duration-300 ease-in"
+                onClick={() => setToggleModal(true)}
+            >
+                Add Branch
+            </button>
             <table className="w-full text-sm border-collapse table-auto ">
                 <thead className="">
                     <tr>
@@ -123,6 +158,16 @@ const Branch = ({ branches }) => {
                 isOpen={isOpen}
                 yesAction={deleteBranch}
                 noAction={cancelDeleteBranch}
+            />
+            <CreateModal
+                isOpen={toggleModal}
+                setIsOpen={setToggleModal}
+                data={data}
+                setData={setData}
+                errors={errors}
+                title="Create new branch"
+                action={createBranch}
+                processing={processing}
             />
         </div>
     );
