@@ -15,6 +15,7 @@ class BranchController extends Controller
     public function index()
     {
         $branches = Branch::all();
+
         return Inertia::render('Branch', compact('branches'));
     }
 

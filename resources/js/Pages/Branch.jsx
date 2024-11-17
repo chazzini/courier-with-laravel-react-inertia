@@ -1,13 +1,30 @@
 import { MdDeleteForever } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
-import React from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useForm } from "@inertiajs/react";
+import ConfirmationDialog from "../Components/ConfirmationDialog";
 
 const Branch = ({ branches }) => {
     const { data, setData, post, processing, delete: destroy } = useForm();
 
-    const deleteBranch = (id) => {
-        destroy("/branches/" + id);
+    const [isOpen, setIsOpen] = useState(false);
+    const [targetBranch, setTargetBranch] = useState({ id: "", street: "" });
+
+    const handleDeleteBranch = (id, street) => {
+        setTargetBranch({ id: id, street: street });
+        setIsOpen(true);
+    };
+
+    const deleteBranch = () => {
+        if (targetBranch) {
+            destroy("/branches/" + targetBranch.id);
+        }
+        setIsOpen(false);
+    };
+
+    const cancelDeleteBranch = () => {
+        setTargetBranch(0);
+        setIsOpen(false);
     };
 
     return (
@@ -45,7 +62,7 @@ const Branch = ({ branches }) => {
                     </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-slate-800">
-                    {branches.length > 0 ? (
+                    {branches.length ? (
                         branches.map((e, index) => {
                             return (
                                 <tr key={e.id}>
@@ -55,29 +72,34 @@ const Branch = ({ branches }) => {
                                     <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.branch_code}
                                     </td>
-                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                    <td className="p-4 pl-8  border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.street}
                                     </td>
                                     <td className="p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.city}
                                     </td>
-                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                    <td className="p-4 pl-8  border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.state}
                                     </td>
-                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                    <td className="p-4 pl-8  border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.country}
                                     </td>
-                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                    <td className="p-4 pl-8  border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.phone}
                                     </td>
-                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                    <td className="p-4 pl-8  border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {e.email}
                                     </td>
                                     <td className="flex flex-row items-center justify-center gap-4 p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         <BiEditAlt className="text-2xl text-green-500" />
                                         <MdDeleteForever
                                             className="text-2xl text-red-500"
-                                            onClick={() => deleteBranch(e.id)}
+                                            onClick={() => {
+                                                handleDeleteBranch(
+                                                    e.id,
+                                                    e.street
+                                                );
+                                            }}
                                         />
                                     </td>
                                 </tr>
@@ -86,8 +108,8 @@ const Branch = ({ branches }) => {
                     ) : (
                         <tr>
                             <td
-                                colspan="9"
-                                className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400"
+                                colSpan="9"
+                                className="p-4 pl-8 text-center border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400"
                             >
                                 {" "}
                                 No branch available
@@ -96,6 +118,12 @@ const Branch = ({ branches }) => {
                     )}
                 </tbody>
             </table>
+            <ConfirmationDialog
+                message={`Are you sure you want to delete this branch <strong>"${targetBranch.street}" </strong>`}
+                isOpen={isOpen}
+                yesAction={deleteBranch}
+                noAction={cancelDeleteBranch}
+            />
         </div>
     );
 };
