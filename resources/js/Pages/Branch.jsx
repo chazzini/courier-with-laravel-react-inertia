@@ -45,43 +45,55 @@ const Branch = ({ branches }) => {
                     </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-slate-800">
-                    {branches.map((e, index) => {
-                        return (
-                            <tr key={e.id}>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {index + 1}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.branch_code}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.street}
-                                </td>
-                                <td className="p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.city}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.state}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.country}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.phone}
-                                </td>
-                                <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    {e.email}
-                                </td>
-                                <td className="flex flex-row items-center justify-center gap-4 p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                    <BiEditAlt className="text-2xl text-green-500" />
-                                    <MdDeleteForever
-                                        className="text-2xl text-red-500"
-                                        onClick={() => deleteBranch(e.id)}
-                                    />
-                                </td>
-                            </tr>
-                        );
-                    })}
+                    {branches.length > 0 ? (
+                        branches.map((e, index) => {
+                            return (
+                                <tr key={e.id}>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {index + 1}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.branch_code}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.street}
+                                    </td>
+                                    <td className="p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.city}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.state}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.country}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.phone}
+                                    </td>
+                                    <td className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {e.email}
+                                    </td>
+                                    <td className="flex flex-row items-center justify-center gap-4 p-4 pl-8 border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        <BiEditAlt className="text-2xl text-green-500" />
+                                        <MdDeleteForever
+                                            className="text-2xl text-red-500"
+                                            onClick={() => deleteBranch(e.id)}
+                                        />
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    ) : (
+                        <tr>
+                            <td
+                                colspan="9"
+                                className="p-4 pl-8 font-semibold border-b border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400"
+                            >
+                                {" "}
+                                No branch available
+                            </td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>
