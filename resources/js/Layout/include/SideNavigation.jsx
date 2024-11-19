@@ -4,9 +4,12 @@ import { MdDashboard } from "react-icons/md";
 import { Link, usePage } from "@inertiajs/react";
 import SideNavigationLink from "../../Components/SideNavigationLink";
 import { HiBuildingOffice2 } from "react-icons/hi2";
+import { useRoute } from "../../../../vendor/tightenco/ziggy";
 
 const SideNavigation = ({ toggle }) => {
     const { logo } = usePage().props;
+
+    const route = useRoute();
 
     return (
         <div
@@ -22,12 +25,14 @@ const SideNavigation = ({ toggle }) => {
                 </div>
                 <ul>
                     <SideNavigationLink
+                        active={route().current("branches.index")}
                         link={route("branches.index")}
                         icon={<MdDashboard />}
                         text="Dashboard"
                     />
                     <SideNavigationLink
-                        link="/branches"
+                        active={route().current("branches.index")}
+                        link={route("branches.index")}
                         icon={<HiBuildingOffice2 />}
                         text="Branch"
                     />

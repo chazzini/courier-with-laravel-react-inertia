@@ -22,21 +22,21 @@ const CreateModal = ({
     return (
         <>
             {isOpen && (
-                <div className=" absolute w-full h-full top-0 right-0 bg-black bg-opacity-90 flex justify-center items-center">
-                    <div className="bg-white border rounded-lg  w-5/6 md:w-2/6 mx-auto align-middle h-4/5 overflow-y-scroll">
-                        <div className="bg-slate-100 text-black px-10  py-4 w-full rounded-t-lg text-sm flex justify-between items-center">
+                <div className="absolute top-0 right-0 flex items-center justify-center w-full h-full bg-black  bg-opacity-90">
+                    <div className="w-5/6 mx-auto overflow-y-scroll align-middle bg-white border rounded-lg md:w-2/6 h-4/5">
+                        <div className="flex items-center justify-between w-full px-10 py-4 text-sm text-black rounded-t-lg bg-slate-100">
                             <span className="text-lg font-medium">{title}</span>{" "}
                             <AiOutlineCloseSquare
-                                className="text-slate-900 text-xl cursor-pointer"
+                                className="text-xl cursor-pointer text-slate-900"
                                 onClick={() => setIsOpen(false)}
                             />
                         </div>
                         <form
-                            className="w-full max-w-lg py-4 px-10"
+                            className="w-full max-w-lg px-10 py-4"
                             onSubmit={handleSubmit}
                         >
-                            <div className="flex flex-wrap -mx-3 mb-6">
-                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div className="flex flex-wrap mb-6 -mx-3">
+                                <div className="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                                     <Input
                                         label="Street"
                                         error={errors.street}
@@ -46,7 +46,7 @@ const CreateModal = ({
                                         }
                                     />
                                 </div>
-                                <div className="w-full md:w-1/2 px-3">
+                                <div className="w-full px-3 md:w-1/2">
                                     <Input
                                         label="City"
                                         error={errors.city}
@@ -57,8 +57,8 @@ const CreateModal = ({
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-wrap -mx-3 mb-6">
-                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div className="flex flex-wrap mb-6 -mx-3">
+                                <div className="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                                     <Input
                                         label="State"
                                         error={errors.state}
@@ -68,7 +68,7 @@ const CreateModal = ({
                                         }
                                     />
                                 </div>
-                                <div className="w-full md:w-1/2 px-3">
+                                <div className="w-full px-3 md:w-1/2">
                                     <Input
                                         label="Country"
                                         error={errors.country}
@@ -80,8 +80,8 @@ const CreateModal = ({
                                 </div>
                             </div>
 
-                            <div className="flex flex-wrap -mx-3 mb-6">
-                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div className="flex flex-wrap mb-6 -mx-3">
+                                <div className="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                                     <Input
                                         label="Email"
                                         error={errors.email}
@@ -92,7 +92,7 @@ const CreateModal = ({
                                         type="email"
                                     />
                                 </div>
-                                <div className="w-full md:w-1/2 px-3">
+                                <div className="w-full px-3 md:w-1/2">
                                     <Input
                                         label="Phone"
                                         error={errors.phone}
@@ -104,8 +104,8 @@ const CreateModal = ({
                                     />
                                 </div>
                             </div>
-                            <div className="flex flex-wrap -mx-3 mb-6">
-                                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <div className="flex flex-wrap mb-6 -mx-3">
+                                <div className="w-full px-3 mb-6 md:w-1/2 md:mb-0">
                                     <Input
                                         label="Zip_code"
                                         error={errors.zip_code}
@@ -118,11 +118,11 @@ const CreateModal = ({
                                 </div>
                             </div>
                             <button
-                                className="py-2 px-4 hover:bg-black bg-slate-800 text-white rounded-md transition-all duration-300 ease-in"
+                                className="px-4 py-2 text-white transition-all duration-300 ease-in rounded-md hover:bg-black bg-slate-800"
                                 type="submit"
                                 disabled={processing}
                             >
-                                Create
+                                Save
                             </button>
                         </form>
                     </div>

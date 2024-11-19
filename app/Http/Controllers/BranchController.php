@@ -54,7 +54,7 @@ class BranchController extends Controller
      */
     public function show(Branch $branch)
     {
-        //
+        return response()->json(['branch' => $branch]);
     }
 
     /**
@@ -70,7 +70,19 @@ class BranchController extends Controller
      */
     public function update(Request $request, Branch $branch)
     {
-        //
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'country' => 'required|string|max:150',
+            'street' => 'required|string|max:150',
+            'city' => 'required|string|max:150',
+            'state' => 'required|string|max:100',
+            'phone' => 'required|string|max:20',
+            'zip_code' => 'string',
+        ]);
+
+        $branch->update($validated);
+
+        return redirect(route('branches.index'))->with('success', 'Branch successfully updated');
     }
 
     /**
